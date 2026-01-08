@@ -46,11 +46,10 @@ const Home: React.FC = () => {
 
   return (
     <section
-      id="home"
-      className="px-6 md:px-10 lg:px-16 py-20 md:py-32 bg-white min-h-screen"
+      className="px-2 md:px-5 lg:px-8 bg-white"
     >
       {/* Hero */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-20 md:mb-32">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-27">
         <div>
           <h1 className="text-7xl md:text-9xl font-500 tracking-tight leading-none text-gray-900">
             DAVID
@@ -67,8 +66,8 @@ const Home: React.FC = () => {
       </div>
 
       {/* Featured Projects - Horizontal Scroll */}
-      <div className="mb-16">
-        <h2 className="flex items-end text-2xl md:text-4xl font-bold text-gray-900 mb-8">
+      <div className="mb-8">
+        <h2 className="flex items-end text-2xl md:text-4xl font-bold text-gray-900">
           PROJECTS <ArrowDownRight className="ml-2 w-5 h-5" />
         </h2>
       </div>
@@ -81,7 +80,7 @@ const Home: React.FC = () => {
               className="min-w-[32px] md:min-w-[42px] flex-shrink-0 snap-start bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 group"
             >
               {/* Project Image/Thumbnail */}
-              <div className="h-48 md:h-64 bg-gray-200 relative overflow-hidden">
+              {/* <div className="h-48 md:h-64 bg-gray-200 relative overflow-hidden">
                 {project.image ? (
                   <img
                     src={project.image}
@@ -93,7 +92,7 @@ const Home: React.FC = () => {
                     Project Screenshot
                   </div>
                 )}
-              </div>
+              </div> */}
 
               {/* Content */}
               <div className="p-6 md:p-8">
@@ -132,7 +131,7 @@ const Home: React.FC = () => {
         <div className="absolute right-1">
           <a
             href="#projects"
-            className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors whitespace-nowrap"
+            className="inline-flex items-center px-6 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-700 transition-colors whitespace-nowrap"
           >
             See More
             <ArrowUpRight className="ml-2 w-5 h-5" />

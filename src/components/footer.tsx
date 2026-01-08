@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'; // Import motion from framer-motion
 const Footer: React.FC = () => {
   return (
     <footer>
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-3 pt-10">
         {/* Left Side - Branding */}
         <div className="mb-4 md:mb-0">
-          <a href="#" className="text-lg font-semibold text-gray-900 dark:text-gray-100">&copy; 2024 Davash</a>
+          <a href="#" className="text-lg font-semibold text-gray-900 dark:text-gray-100">&copy; 2026 Davash</a>
         </div>
 
         {/* Right Side - Social Media Links */}
