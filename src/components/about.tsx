@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
   return (
-    <section className="py-10 px-3 md:px-10">
+    <section className="py-8 px-3 md:px-10">
       <div className="flex flex-col lg:flex-row justify-between gap-100">
         {/* Left Side */}
         <div className="flex flex-col justify-around lg:w-1/2">

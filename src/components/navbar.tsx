@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
   return (
      <header>
           <div>
-            <nav className="m-8 flex justify-between">
+            <nav className="m-8 flex justify-between text-white">
               <h2 className="text-xl font-300"><a href="./home">DAVASH.</a></h2>
               <div>
                 <a href="/About" className="mx-10">
