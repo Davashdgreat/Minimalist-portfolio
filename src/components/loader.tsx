@@ -25,7 +25,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       setDisplayText(
         mainText
           .split('')
-          .map((char, index) => {
+          .map((mainText, index) => {
+            if (mainText === ' ') return ' ';
             if (index < Math.floor(iteration / 4)) return mainText[index];
             return charSet[Math.floor(Math.random() * charSet.length)];
           })
@@ -53,8 +54,8 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       setDisplaySub(
         subText
           .split('')
-          .map((char, index) => {
-            if (char === ' ') return ' ';
+          .map((subText, index) => {
+            if (subText === ' ') return ' ';
             if (index < Math.floor(iteration / 3)) return subText[index];
             return charSet[Math.floor(Math.random() * charSet.length)];
           })
