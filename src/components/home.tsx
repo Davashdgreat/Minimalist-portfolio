@@ -1,4 +1,4 @@
-import React from "react";
+import { FC, useState, useRef, useEffect } from "react";
 // Import icons if needed (e.g., from react-icons)
 import { ArrowDownRight, ArrowUpRight } from "lucide-react"; // Optional: install lucide-react for arrows
 
@@ -11,7 +11,7 @@ interface TextShuffleProps {
   className?: string; // Optional CSS class for styling
 }
 
-const TextShuffle: React.FC<TextShuffleProps> = ({
+const TextShuffle: FC<TextShuffleProps> = ({
   text,
   delay = 0,
   baseDelay,
@@ -20,11 +20,11 @@ const TextShuffle: React.FC<TextShuffleProps> = ({
   charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   className,
 }) => {
-  const [displayText, setDisplayText] = React.useState(""); // Start blank
-  const animationRef = React.useRef<number | null>(null); // For requestAnimationFrame
-  const startTimeRef = React.useRef<number | null>(null); // Track start time
+  const [displayText, setDisplayText] = useState(""); // Start blank
+  const animationRef = useRef<number | null>(null); // For requestAnimationFrame
+  const startTimeRef = useRef<number | null>(null); // Track start time
 
-  React.useEffect(() => {
+  useEffect(() => {
     const startAnimation = () => {
       const animate = (timestamp: number) => {
         if (!startTimeRef.current) startTimeRef.current = timestamp;
@@ -70,7 +70,7 @@ const projects = [
       "Occupy is a housing platform that allows tenants in Nigeria to move into properties by paying in installments, while landlords receive full rent upfront.",
     techStack: "React, TypeScript, Tailwind CSS",
     link: "https://occupy-v2.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/occupy.PNG", // Optional: add image URL if available
+    image: "/public/occupy.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -79,7 +79,7 @@ const projects = [
       "A web app for renting school football fields, allowing users to book fields, agents to manage listings, and schools to offer rental spaces, increasing the credibilty and accountability of primary and secondary institutions",
     techStack: "React, TypeScript, Tailwind CSS",
     link: "https://open-school-field1.vercel.app/", // GitHub link (replace with a live link)
-    image: "/src/assets/opschfld.PNG", // Optional: add image URL if available
+    image: "/public/opschfld.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -89,7 +89,7 @@ const projects = [
     techStack:
       "HTML, CSS, Javascript, React, Tailwind CSS, Openweather API Integration",
     link: "https://weather-app-delta-seven-75.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/weather.PNG", // Optional: add image URL if available
+    image: "/public/weather.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -98,12 +98,12 @@ const projects = [
       "A Simple snake xenzia game, made functional for both web and mobile players, can you get the highest score?",
     techStack: "HTML, CSS, JavaScript, Tailwind CSS",
     link: "https://snake-xenzia-beige.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/snake.PNG", // Optional: add image URL if available
+    image: "/public/snake.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
 ];
 
-const Home: React.FC = () => {
+const Home: FC = () => {
   return (
     <section className="px-2 py-15 md:px-5 lg:px-8 text-white">
       {/* Hero */}
@@ -137,7 +137,7 @@ const Home: React.FC = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="w-80 h-50 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500 border border-gray-100 group relative"
+              className="w-80 h-50 shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500 border border-gray-100 group relative"
             >
               {/* Project Image as Background */}
               <img
@@ -147,7 +147,7 @@ const Home: React.FC = () => {
               />
 
               {/* Overlay Content */}
-              <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent group-hover:from-black/80 group-hover:to-black/40 transition-colors duration-500">
+              <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-linear-to-t from-black/60 to-transparent group-hover:from-black/80 group-hover:to-black/40 transition-colors duration-500">
                
                 {/* Hidden on initial, shown on hover */}
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col">
