@@ -70,7 +70,7 @@ const projects = [
       "Occupy is a housing platform that allows tenants in Nigeria to move into properties by paying in installments, while landlords receive full rent upfront.",
     techStack: "React, TypeScript, Tailwind CSS",
     link: "https://occupy-v2.vercel.app/", // GitHub link (replace with live link)
-    image: "/public/occupy.PNG", // Optional: add image URL if available
+    image: "/occupy.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -79,7 +79,7 @@ const projects = [
       "A web app for renting school football fields, allowing users to book fields, agents to manage listings, and schools to offer rental spaces, increasing the credibilty and accountability of primary and secondary institutions",
     techStack: "React, TypeScript, Tailwind CSS",
     link: "https://open-school-field1.vercel.app/", // GitHub link (replace with a live link)
-    image: "/public/opschfld.PNG", // Optional: add image URL if available
+    image: "/opschfld.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -89,7 +89,7 @@ const projects = [
     techStack:
       "HTML, CSS, Javascript, React, Tailwind CSS, Openweather API Integration",
     link: "https://weather-app-delta-seven-75.vercel.app/", // GitHub link (replace with live link)
-    image: "/public/weather.PNG", // Optional: add image URL if available
+    image: "/weather.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -98,7 +98,7 @@ const projects = [
       "A Simple snake xenzia game, made functional for both web and mobile players, can you get the highest score?",
     techStack: "HTML, CSS, JavaScript, Tailwind CSS",
     link: "https://snake-xenzia-beige.vercel.app/", // GitHub link (replace with live link)
-    image: "/public/snake.PNG", // Optional: add image URL if available
+    image: "/snake.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
 ];
