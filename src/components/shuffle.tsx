@@ -1,74 +1,112 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 interface TextShuffleProps {
-  text: string; // The target text to reveal
-  delay?: number; // Initial delay before starting shuffle in ms (default: 0)
-  duration?: number; // Total animation duration in ms (default: 1000)
-  charSet?: string; // Characters to shuffle with (default: letters + numbers + symbols)
-  className?: string; // Optional CSS class for styling
-  fadeDuration?: number; // Fade-in duration in ms (default: 300)
+  text: string;
+  className?: string;
+  charSet?: string;
+  baseDelay?: number;
+  charDuration?: number;
+  staggerDelay?: number;
+  triggerOnView?: boolean; // New: trigger when scrolled into view
 }
 
 const TextShuffle: React.FC<TextShuffleProps> = ({
   text,
-  delay = 0,
-  duration = 1000,
-  charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()',
-  className,
-  fadeDuration = 300,
+  className = '',
+  charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*<>[]{}',
+  baseDelay = 0,
+  charDuration = 600,
+  staggerDelay = 100,
+  triggerOnView = false,
 }) => {
-  const [displayText, setDisplayText] = useState(''); // Start blank
-  const [opacity, setOpacity] = useState(0); // Start invisible
-  const animationRef = useRef<number>(); // For requestAnimationFrame
-  const startTimeRef = useRef<number>(); // Track start time
+  const [displayChars, setDisplayChars] = useState<string[]>(
+    Array(text.length).fill('')
+  );
+  const [lockedChars, setLockedChars] = useState<boolean[]>(
+    Array(text.length).fill(false)
+  );
+  const [hasTriggered, setHasTriggered] = useState(false);
+  const frameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  // Use intersection observer if triggerOnView is true
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
+
+  const shouldStart = triggerOnView ? (inView && !hasTriggered) : true;
 
   useEffect(() => {
-    const startAnimation = () => {
-      setOpacity(1); // Trigger fade-in when shuffle starts
+    if (!shouldStart || hasTriggered) return;
 
-      const animate = (timestamp: number) => {
-        if (!startTimeRef.current) startTimeRef.current = timestamp;
-        const progress = (timestamp - startTimeRef.current) / duration;
+    if (triggerOnView && inView) {
+      setHasTriggered(true);
+    }
 
-        if (progress < 1) {
-          const shuffled = text
-            .split('')
-            .map((char, index) => {
-              // Gradually lock characters based on progress and position
-              if (progress > index / text.length) return char;
-              return charSet[Math.floor(Math.random() * charSet.length)];
-            })
-            .join('');
-          setDisplayText(shuffled);
-          animationRef.current = requestAnimationFrame(animate);
-        } else {
-          setDisplayText(text); // Ensure final text is set
+    const startTimeout = setTimeout(() => {
+      startTimeRef.current = performance.now();
+      
+      const animate = (now: number) => {
+        const elapsed = now - startTimeRef.current;
+        
+        setDisplayChars(prev => {
+          const next = [...prev];
+          
+          for (let i = 0; i < text.length; i++) {
+            const charStartTime = i * staggerDelay;
+            const charEndTime = charStartTime + charDuration;
+            
+            if (elapsed >= charStartTime && elapsed < charEndTime) {
+              next[i] = charSet[Math.floor(Math.random() * charSet.length)];
+            } else if (elapsed >= charEndTime && !lockedChars[i]) {
+              next[i] = text[i];
+              setLockedChars(prev => {
+                const locked = [...prev];
+                locked[i] = true;
+                return locked;
+              });
+            } else if (lockedChars[i]) {
+              next[i] = text[i];
+            }
+          }
+          
+          return next;
+        });
+
+        const allLocked = lockedChars.every(l => l) || 
+          elapsed > (text.length * staggerDelay + charDuration);
+        
+        if (!allLocked) {
+          frameRef.current = requestAnimationFrame(animate);
         }
       };
 
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    const timeoutId = setTimeout(startAnimation, delay);
+      frameRef.current = requestAnimationFrame(animate);
+    }, baseDelay);
 
     return () => {
-      clearTimeout(timeoutId);
-      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      clearTimeout(startTimeout);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
     };
-  }, [text, delay, duration, charSet]); // Re-run if props change
+  }, [shouldStart, text, charSet, baseDelay, charDuration, staggerDelay, triggerOnView, inView, hasTriggered, lockedChars]);
 
-  return (
-    <span
-      className={className}
-      style={{
-        opacity,
-        transition: `opacity ${fadeDuration}ms ease-in-out`,
-        display: 'inline-block', // Prevents layout jumps
-      }}
-    >
-      {displayText}
+  const content = (
+    <span className={`inline-flex tracking-tighter ${className}`}>
+      {displayChars.map((char, i) => (
+        <span 
+          key={i} 
+          className={`inline-block ${lockedChars[i] ? 'text-white' : 'text-gray-400'}`}
+          style={{ minWidth: '0.6em' }}
+        >
+          {char || '\u00A0'}
+        </span>
+      ))}
     </span>
   );
+
+  return triggerOnView ? <span ref={ref}>{content}</span> : content;
 };
 
 export default TextShuffle;

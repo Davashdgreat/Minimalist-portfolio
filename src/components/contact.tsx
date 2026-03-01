@@ -75,12 +75,12 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <section className="py-30 px-10 md:px-10">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Left Side - Socials */}
         <motion.div
           ref={leftRef}
-          className="space-y-8 m-auto"
+          className="space-y-8 m-auto md:text-center"
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: inViewLeft ? 0 : -200, opacity: inViewLeft ? 1 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
@@ -141,7 +141,8 @@ const Contact: React.FC = () => {
         {/* Right Side - Contact Form */}
         <motion.div
           ref={rightRef}
-          className="border shadow-lg rounded-lg p-8"
+          // className="border shadow-lg rounded-lg p-8"
+          className="bg-white/10 backdrop-blur-10 border border-white/20 shadow-2xl rounded-2xl p-8"
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: inViewRight ? 0 : 200, opacity: inViewRight ? 1 : 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -157,7 +158,8 @@ const Contact: React.FC = () => {
                 name="user_name"
                 id="name"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border border-gray-300 rounded-lg text-white"
+                placeholder="John Doe"
               />
             </div>
             <div>
@@ -169,7 +171,8 @@ const Contact: React.FC = () => {
                 name="user_email"
                 id="email"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg"
+                className="w-full p-3 border border-gray-300 rounded-lg text-white"
+                placeholder="johndoe@gmail.com"
               />
             </div>
             <div>
@@ -182,16 +185,17 @@ const Contact: React.FC = () => {
                 rows={4}
                 required
                 className="w-full p-3 border border-gray-300 rounded-lg text-white"
+                placeholder="You can type in a message or request features added to this website"
               ></textarea>
             </div>
             <button
               type="submit"
-              className="w-full border bg-[#F5F5F5] text-white py-3 rounded-lg hover:bg-white hover:text-black cursor-pointer"
+              className="w-full border bg-transparent text-white py-3 rounded-lg hover:bg-gray-500 hover:text-black hover:border-black cursor-pointer"
             >
               Send Message
             </button>
             {message && (
-              <p className="text-center text-white mt-4">{message}</p>
+              <p className="text-center text-gray-900 dark:text-gray-100 mt-4">{message}</p>
             )}
           </form>
         </motion.div>

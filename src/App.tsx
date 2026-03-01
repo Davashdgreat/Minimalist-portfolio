@@ -4,20 +4,31 @@ import Home from "./components/home";
 import About from "./components/about";
 import Projects from "./components/projects";
 import Contact from "./components/contact";
-import Footer from "./components/footer";
 import { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'; // Import these
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from "framer-motion";
+import CustomCursor from "./components/cursor";
+import NoiseOverlay from "./components/noise";
+import Loader from "./components/loader";
+
+// Page wrapper component with transition
+const PageWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false); // Placeholder for future auth
-
+  const [isLoading, setIsLoading] = useState(true);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-  // Auto-scroll to top on route changes
   const location = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [location]);
 
   // Show/hide scroll-to-top button
   const handleScroll = () => {
@@ -39,18 +50,37 @@ function App() {
 
   return (
     <>
+     {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
+      <CustomCursor />
       <Navbar />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* Catch-all: Redirect to home for any other path */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+      <main className="px-4 md:pl-24 pb-24 md:pb-0 pt-4 md:pt-0">
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={
+              <PageWrapper>
+                <Home />
+              </PageWrapper>
+            } />
+            <Route path="/about" element={
+              <PageWrapper>
+                <About />
+              </PageWrapper>
+            } />
+            <Route path="/projects" element={
+              <PageWrapper>
+                <Projects />
+              </PageWrapper>
+            } />
+            <Route path="/contact" element={
+              <PageWrapper>
+                <Contact />
+              </PageWrapper>
+            } />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </AnimatePresence>
       </main>
-      <Footer />
+  
       {showScrollToTop && (
         <button
           onClick={scrollToTop}
@@ -60,76 +90,9 @@ function App() {
           ↑
         </button>
       )}
+      <NoiseOverlay />
     </>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import "./App.css";
-// import Navbar from "./components/navbar";
-// import Home from "./components/home";
-// import About from "./components/about";
-// import Projects from "./components/projects";
-// import Contact from "./components/contact";
-// import Footer from "./components/footer";
-// import { useEffect, useState } from "react";
-// import {route, routes, Navigate} from "react-router-dom";
-
-// function App() {
-//   const [isAdmin, setIsAdmin] = useState(false); // Placeholder for future auth
-
-//   const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-//   // Show the "Scroll to Top" button when scrolling down
-//   const handleScroll = () => {
-//     if (window.scrollY > 300) {
-//       setShowScrollToTop(true); // Show button when scrolled more than 300px
-//     } else {
-//       setShowScrollToTop(false); // Hide button when at the top
-//     }
-//   };
-
-//   useEffect(() => {
-//     window.addEventListener("scroll", handleScroll); // Add scroll event listener
-//     return () => window.removeEventListener("scroll", handleScroll); // Clean up on component unmount
-//   }, []);
-
-//   // Scroll to top function
-//   const scrollToTop = () => {
-//     window.scrollTo({
-//       top: 0,
-//       behavior: "smooth", // Smooth scroll'
-//     });
-//   };
-
-//   return (  
-//       <>
-//         <Navbar />
-//         <Home />
-//         {/* <About />
-//         <Projects />
-//         <Contact /> */}
-//         <Footer />
-//       </>
-//   );
-// }
-
-// export default App;

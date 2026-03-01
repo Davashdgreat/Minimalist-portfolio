@@ -5,6 +5,7 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react"; // Optional: instal
 interface TextShuffleProps {
   text: string; // The target text to reveal
   delay?: number; // Initial delay before starting shuffle in ms (default: 0)
+  baseDelay?: number; // Alias for delay (compatibility)
   duration?: number; // Total animation duration in ms (default: 1000)
   charSet?: string; // Characters to shuffle with (default: letters + numbers + symbols)
   className?: string; // Optional CSS class for styling
@@ -13,14 +14,15 @@ interface TextShuffleProps {
 const TextShuffle: React.FC<TextShuffleProps> = ({
   text,
   delay = 0,
+  baseDelay,
   duration = 1000,
   // charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()',
-  charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   className,
 }) => {
-  const [displayText, setDisplayText] = React.useState(''); // Start blank
-  const animationRef = React.useRef<number>(); // For requestAnimationFrame
-  const startTimeRef = React.useRef<number>(); // Track start time
+  const [displayText, setDisplayText] = React.useState(""); // Start blank
+  const animationRef = React.useRef<number | null>(null); // For requestAnimationFrame
+  const startTimeRef = React.useRef<number | null>(null); // Track start time
 
   React.useEffect(() => {
     const startAnimation = () => {
@@ -30,12 +32,12 @@ const TextShuffle: React.FC<TextShuffleProps> = ({
 
         if (progress < 1) {
           const shuffled = text
-            .split('')
+            .split("")
             .map(() => {
               // Shuffle all characters randomly until the full duration ends
               return charSet[Math.floor(Math.random() * charSet.length)];
             })
-            .join('');
+            .join("");
           setDisplayText(shuffled);
           animationRef.current = requestAnimationFrame(animate);
         } else {
@@ -46,19 +48,31 @@ const TextShuffle: React.FC<TextShuffleProps> = ({
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    const timeoutId = setTimeout(startAnimation, delay);
+    // Support both `baseDelay` (used in some JSX) and `delay`
+    const startDelay = typeof baseDelay === 'number' ? baseDelay : delay;
+
+    const timeoutId = setTimeout(startAnimation, startDelay);
 
     return () => {
       clearTimeout(timeoutId);
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [text, delay, duration, charSet]); // Re-run if props change
+  }, [text, delay, baseDelay, duration, charSet]); // Re-run if props change
 
   return <span className={className}>{displayText}</span>;
 };
 
 // Sample project data - replace with your real ones
 const projects = [
+  {
+    title: "Occupy",
+    description:
+      "Occupy is a housing platform that allows tenants in Nigeria to move into properties by paying in installments, while landlords receive full rent upfront.",
+    techStack: "React, TypeScript, Tailwind CSS",
+    link: "https://occupy-v2.vercel.app/", // GitHub link (replace with live link)
+    image: "/src/assets/occupy.PNG", // Optional: add image URL if available
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+  },
   {
     title: "Open School Field",
     description:
@@ -79,15 +93,6 @@ const projects = [
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
-    title: "Occupy",
-    description:
-      "Occupy is a housing platform that allows tenants in Nigeria to move into properties by paying in installments, while landlords receive full rent upfront.",
-    techStack: "React, TypeScript, Tailwind CSS",
-    link: "https://occupy-v2.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/occupy.PNG", // Optional: add image URL if available
-    tags: ["React", "TypeScript", "Tailwind CSS"],
-  },
-  {
     title: "Snake Xenzia",
     description:
       "A Simple snake xenzia game, made functional for both web and mobile players, can you get the highest score?",
@@ -100,23 +105,17 @@ const projects = [
 
 const Home: React.FC = () => {
   return (
-    <section
-      className="px-2 md:px-5 lg:px-8 text-white"
-    >
+    <section className="px-2 py-15 md:px-5 lg:px-8 text-white">
       {/* Hero */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-27">
         <div>
-          <h1 className="text-7xl md:text-9xl font-500 tracking-tight leading-none text-gray-100 mb-5">
+          <h1 className="text-7xl sm:text-7xl md:text-9xl font-500 tracking-tight leading-none text-gray-100 mb-5">
             DAV
-            <TextShuffle text="I" delay={1000} duration={1500} />
-            <TextShuffle text="D" delay={1500} duration={1500} />
+            <TextShuffle text="ID" baseDelay={300} />
           </h1>
-          <h1 className="text-7xl md:text-9xl font-500 tracking-tight leading-none text-gray-100">
+          <h1 className="text-7xl sm:text-7xl md:text-9xl font-500 tracking-tight leading-none text-gray-100">
             ASH
-            <TextShuffle text="A" delay={2000} duration={1500} />
-            <TextShuffle text="O" delay={2500} duration={1500} />
-            <TextShuffle text="L" delay={3000} duration={1500} />
-            <TextShuffle text="U" delay={3500} duration={1500} />
+            <TextShuffle text="AOLU" baseDelay={900} />
           </h1>
         </div>
         <div className="mt-8 md:mt-0">
@@ -149,12 +148,12 @@ const Home: React.FC = () => {
 
               {/* Overlay Content */}
               <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black/60 to-transparent group-hover:from-black/80 group-hover:to-black/40 transition-colors duration-500">
-                <h3 className="text-2xl font-semibold text-white mb-3 transition-colors">
-                  {project.title}
-                </h3>
-
+               
                 {/* Hidden on initial, shown on hover */}
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col">
+                  <h3 className="text-2xl font-semibold text-white mb-3 transition-colors">
+                  {project.title}
+                </h3>
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tags.map((tag) => (
@@ -183,14 +182,14 @@ const Home: React.FC = () => {
           ))}
 
           <div className="flex items-center text-center justify-center">
-          <a
-            href="/src/components/projects.tsx"
-            className="text-center items-center px-6 text-white font-medium rounded-lg transition-colors whitespace-nowrap"
-          >
-            <ArrowUpRight className="ml-2 w-5 h-5" />
-            See More
-          </a>
-        </div>
+            <a
+              href="/projects"
+              className="text-center items-center px-6 text-white font-medium rounded-lg transition-colors whitespace-nowrap"
+            >
+              <ArrowUpRight className="m-auto w-5 h-5" />
+              See More
+            </a>
+          </div>
         </div>
 
         {/* See More Button positioned at the right */}

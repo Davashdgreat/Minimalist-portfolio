@@ -1,17 +1,77 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+interface TextShuffleProps {
+  text: string; // The target text to reveal
+  delay?: number; // Initial delay before starting shuffle in ms (default: 0)
+  baseDelay?: number; // Alias for delay (compatibility)
+  duration?: number; // Total animation duration in ms (default: 1000)
+  charSet?: string; // Characters to shuffle with (default: letters + numbers + symbols)
+  className?: string; // Optional CSS class for styling
+}
+
+const TextShuffle: React.FC<TextShuffleProps> = ({
+  text,
+  delay = 0,
+  baseDelay,
+  duration = 1000,
+  // charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()',
+  charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  className,
+}) => {
+  const [displayText, setDisplayText] = React.useState(""); // Start blank
+  const animationRef = React.useRef<number | null>(null); // For requestAnimationFrame
+  const startTimeRef = React.useRef<number | null>(null); // Track start time
+
+  React.useEffect(() => {
+    const startAnimation = () => {
+      const animate = (timestamp: number) => {
+        if (!startTimeRef.current) startTimeRef.current = timestamp;
+        const progress = (timestamp - startTimeRef.current) / duration;
+
+        if (progress < 1) {
+          const shuffled = text
+            .split("")
+            .map(() => {
+              // Shuffle all characters randomly until the full duration ends
+              return charSet[Math.floor(Math.random() * charSet.length)];
+            })
+            .join("");
+          setDisplayText(shuffled);
+          animationRef.current = requestAnimationFrame(animate);
+        } else {
+          setDisplayText(text); // Ensure final text is set
+        }
+      };
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    // Support both `baseDelay` (used in some JSX) and `delay`
+    const startDelay = typeof baseDelay === 'number' ? baseDelay : delay;
+
+    const timeoutId = setTimeout(startAnimation, startDelay);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, [text, delay, baseDelay, duration, charSet]); // Re-run if props change
+
+  return <span className={className}>{displayText}</span>;
+}
+
 const About: React.FC = () => {
   return (
-    <section className="py-8 px-3 md:px-10">
-      <div className="flex flex-col lg:flex-row justify-between gap-100">
+    <section className="py-25 px-3 md:px-10">
+      <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-20">
         {/* Left Side */}
         <div className="flex flex-col justify-around lg:w-1/2">
           {/* Mobile Image */}
           <div className="grid grid-cols-2 gap-4 mb-8 lg:hidden">
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src="/ME.jpg"
+                src="/src/assets/pfp.jpg"
                 alt="David Ashaolu mobile"
                 className="w-full h-full object-cover"
                 style={{ width: '50px', height: '50px' }}
@@ -34,21 +94,15 @@ const About: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              I'm David Ashaolu, a frontend developer & database administrator shaping web applications that stand out and drive meaningful functionality.
+              I'm David Ashaolu, a a Computer Science graduate and software engineer who builds technology with business impact in mind. With a strong frontend foundation and backend data experience, I’ve developed dashboards and enterprise tools that transform operational data into decision-ready insights..
             </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              Originally from Nigeria and now based in Frankfurt, I'm passionate about bringing ambitious visions to life and partnering with founders and brands who refuse to settle for average.
-            </motion.p>
+      
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Specialising in frontend development with React and TypeScript, backend with PHP and MySQL, and database administration.
+              I’m particularly interested in building products and digital solutions that sit at the intersection of engineering, business strategy, and user experience by utilizing my expertise in frontend development with React and TypeScript, backend with Javascipt frameworks, PHP and MySQL, and database administration.  
             </motion.p>
           </div>
         </div>
@@ -76,7 +130,8 @@ const About: React.FC = () => {
             >
               <p className="font-medium text-gray-900 dark:text-gray-100">Email</p> 
               <a href="mailto:ashaoludavid1@gmail.com" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                ashaoludavid1@gmail.com
+                {/* ashaoludavid1@gmail.com */}
+                 <TextShuffle text="ashaoludavid1@gmail.com" baseDelay={900} />
               </a>
             </motion.div>
             <motion.div
@@ -87,7 +142,8 @@ const About: React.FC = () => {
             >
               <span className="font-medium text-gray-900 dark:text-gray-100">GitHub</span>
               <a href="https://github.com/Davashdgreat" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                /Davashdgreat
+                {/* /Davashdgreat */}
+                 <TextShuffle text="/Davashdgreat" baseDelay={900} />
               </a>
             </motion.div>
             <motion.div
@@ -98,7 +154,8 @@ const About: React.FC = () => {
             >
               <span className="font-medium text-gray-900 dark:text-gray-100">LinkedIn</span>
               <a href="https://www.linkedin.com/in/ashaolu-david-1b4a091b6/" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                /in/ashaolu-david-1b4a091b6
+                {/* /in/ashaolu-david-1b4a091b6 */}
+               <TextShuffle text="/in/ashaolu-david-1b4a091b6" baseDelay={900} />
               </a>
             </motion.div>
             <motion.div
@@ -109,7 +166,8 @@ const About: React.FC = () => {
             >
               <span className="font-medium text-gray-900 dark:text-gray-100">YouTube</span>
               <a href="https://www.youtube.com/@imdavash8740" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-                /@imdavash8740
+                {/* /@imdavash8740 */}
+                 <TextShuffle text="/@imdavash8740" baseDelay={900} />
               </a>
             </motion.div>
           </div>

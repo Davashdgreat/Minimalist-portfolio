@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-// import { useInView } from 'react-intersection-observer';
-// import { AnimatePresence } from 'motion/react';
+import { useInView } from 'react-intersection-observer';
+import { AnimatePresence } from 'framer-motion';
 
 interface Skill {
   name: string;
@@ -37,7 +37,7 @@ const Skills: React.FC = () => {
         opacity: 1,
         y: 0,
         transition: {
-          type: 'spring',
+          type: 'spring' as const,
           damping: 10,
           stiffness: 100,
         },
