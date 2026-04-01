@@ -71,7 +71,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-2 gap-4 mb-8 lg:hidden">
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src="/public/pfp.jpg"
+                src="/pfp.jpg"
                 alt="David Ashaolu mobile"
                 className="w-full h-full object-cover"
                 style={{ width: '50px', height: '50px' }}
@@ -111,7 +111,7 @@ const About: React.FC = () => {
           {/* Desktop Image */}
           <div className="hidden lg:block relative overflow-hidden rounded-lg mb-8">
             <motion.img
-              src="/public/pfp.jpg"
+              src="/pfp.jpg"
               alt="David Ashaolu desktop"
               className="w-full h-auto object-cover"
               style={{ width: '500px', height: '500px' }}
