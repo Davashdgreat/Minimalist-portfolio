@@ -21,7 +21,7 @@ const Projects: React.FC = () => {
         "Occupy is a housing platform that allows tenants in Nigeria to move into properties by paying in installments, while landlords receive full rent upfront.",
       techStack: "React, TypeScript, Tailwind CSS",
       link: "https://occupy-v2.vercel.app/",
-      image: "/src/assets/occupy.PNG", // Add image URL if available
+      image: "/public/occupy.PNG", // Add image URL if available
     },
     {
       title: "Open School Field",
@@ -29,7 +29,7 @@ const Projects: React.FC = () => {
         "A web app for renting school football fields, allowing users to book fields, agents to manage listings, and schools to offer rental spaces, increasing the credibility and accountability of primary and secondary institutions",
       techStack: "React, TypeScript, Tailwind CSS",
       link: "https://open-school-field1.vercel.app/",
-      image: "/src/assets/opschfld.PNG", // Add image URL if available
+      image: "/public/opschfld.PNG", // Add image URL if available
     },
     {
       title: "Portfolio Website",
@@ -37,7 +37,7 @@ const Projects: React.FC = () => {
         "A personal portfolio website built with React, TypeScript, and Tailwind CSS, showcasing my projects, technical skills, and professional experience in an interactive and visually appealing design.",
       techStack: "React, TypeScript, Tailwind CSS",
       link: "https://davashfolio1.vercel.app/",
-      image: "/src/assets/port.png",
+      image: "/public/port.png",
     },
     {
       title: "Weather Forecast App",
@@ -45,7 +45,7 @@ const Projects: React.FC = () => {
         "A weather forecast app built with React and OpenWeather API, providing global weather conditions and detailed forecasts that can be shared via whatsapp in an intuitive interface.",
       techStack: "React, Tailwind, Openweather API",
       link: "https://weather-app-delta-seven-75.vercel.app/",
-      image: "/src/assets/weather.PNG",
+      image: "/public/weather.PNG",
     },
     {
       title: "Task Manager App",
@@ -53,7 +53,7 @@ const Projects: React.FC = () => {
         "A task management app to help organize personal tasks with features like adding, editing, and deleting tasks, built with Javascript.",
       techStack: "HTML, CSS, JavaScript, Tailwind CSS",
       link: "https://to-do-list-khaki-six-62.vercel.app/",
-      image: "/src/assets/task.PNG",
+      image: "/public/task.PNG",
     },
     {
       title: "Snake Xenzia",
@@ -61,13 +61,13 @@ const Projects: React.FC = () => {
         "A Simple snake xenzia game, made functional for both web and mobile players, can you get the highest score?",
       techStack: "HTML, CSS, JavaScript, Tailwind CSS",
       link: "https://snake-xenzia-beige.vercel.app/",
-      image: "/src/assets/snake.PNG",
+      image: "/public/snake.PNG",
     },
   ];
 
   if (selectedProject) {
     return (
-      <section id="projects" className="py-8 px-6">
+      <section id="projects" className="py-13 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.button
             onClick={() => setSelectedProject(null)}
@@ -121,7 +121,7 @@ const Projects: React.FC = () => {
   }
 
   return (
-    <section className="py-10 md:py-20 px-4 md:px-6">
+    <section className="py-10 md:py-10 px-4 md:px-6">
       <div className="md:w-2xl lg:w-6xl mx-auto">
         <motion.h2
           className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-10 text-center"

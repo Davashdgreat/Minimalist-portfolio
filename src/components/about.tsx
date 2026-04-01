@@ -63,7 +63,7 @@ const TextShuffle: React.FC<TextShuffleProps> = ({
 
 const About: React.FC = () => {
   return (
-    <section className="py-25 px-3 md:px-10">
+    <section className="py-15 px-3 md:px-10">
       <div className="flex flex-col lg:flex-row justify-between gap-8 lg:gap-20">
         {/* Left Side */}
         <div className="flex flex-col justify-around lg:w-1/2">
@@ -71,7 +71,7 @@ const About: React.FC = () => {
           <div className="grid grid-cols-2 gap-4 mb-8 lg:hidden">
             <div className="relative overflow-hidden rounded-lg">
               <img
-                src="/src/assets/pfp.jpg"
+                src="/public/pfp.jpg"
                 alt="David Ashaolu mobile"
                 className="w-full h-full object-cover"
                 style={{ width: '50px', height: '50px' }}
@@ -111,7 +111,7 @@ const About: React.FC = () => {
           {/* Desktop Image */}
           <div className="hidden lg:block relative overflow-hidden rounded-lg mb-8">
             <motion.img
-              src="/src/assets/pfp.jpg"
+              src="/public/pfp.jpg"
               alt="David Ashaolu desktop"
               className="w-full h-auto object-cover"
               style={{ width: '500px', height: '500px' }}

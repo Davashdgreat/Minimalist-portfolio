@@ -75,7 +75,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="py-30 px-10 md:px-10">
+    <section className="py-20 px-10 md:px-10">
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Left Side - Socials */}
         <motion.div

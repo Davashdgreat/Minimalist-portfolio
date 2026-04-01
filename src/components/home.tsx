@@ -70,7 +70,7 @@ const projects = [
       "Occupy is a housing platform that allows tenants in Nigeria to move into properties by paying in installments, while landlords receive full rent upfront.",
     techStack: "React, TypeScript, Tailwind CSS",
     link: "https://occupy-v2.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/occupy.PNG", // Optional: add image URL if available
+    image: "/public/occupy.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -79,7 +79,7 @@ const projects = [
       "A web app for renting school football fields, allowing users to book fields, agents to manage listings, and schools to offer rental spaces, increasing the credibilty and accountability of primary and secondary institutions",
     techStack: "React, TypeScript, Tailwind CSS",
     link: "https://open-school-field1.vercel.app/", // GitHub link (replace with a live link)
-    image: "/src/assets/opschfld.PNG", // Optional: add image URL if available
+    image: "/public/opschfld.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -89,7 +89,7 @@ const projects = [
     techStack:
       "HTML, CSS, Javascript, React, Tailwind CSS, Openweather API Integration",
     link: "https://weather-app-delta-seven-75.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/weather.PNG", // Optional: add image URL if available
+    image: "/public/weather.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
   {
@@ -98,14 +98,14 @@ const projects = [
       "A Simple snake xenzia game, made functional for both web and mobile players, can you get the highest score?",
     techStack: "HTML, CSS, JavaScript, Tailwind CSS",
     link: "https://snake-xenzia-beige.vercel.app/", // GitHub link (replace with live link)
-    image: "/src/assets/snake.PNG", // Optional: add image URL if available
+    image: "/public/snake.PNG", // Optional: add image URL if available
     tags: ["React", "TypeScript", "Tailwind CSS"],
   },
 ];
 
 const Home: React.FC = () => {
   return (
-    <section className="px-2 py-15 md:px-5 lg:px-8 text-white">
+    <section className="px-2 py-5 md:px-5 lg:px-4 text-white">
       {/* Hero */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-27">
         <div>
@@ -133,11 +133,11 @@ const Home: React.FC = () => {
       </div>
 
       <div className="relative">
-        <div className="flex overflow-x-auto gap-8 snap-x snap-mandatory justify-center cursor-pointer py-2">
+        <div className="flex overflow-x-auto gap-4 snap-x snap-mandatory justify-center cursor-pointer py-2">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="w-80 h-50 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500 border border-gray-100 group relative"
+              className="w-70 h-40 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-500 border border-gray-100 group relative"
             >
               {/* Project Image as Background */}
               <img
