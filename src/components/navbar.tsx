@@ -97,11 +97,11 @@ const DesktopNav: React.FC = () => {
 
   return (
     <motion.nav
-      className="fixed left-4 top-1/2 -translate-y-1/2 bg-[#1a1a1a] rounded-3xl py-8 px-3 z-50 flex flex-col items-center shadow-2xl border border-gray-800"
+      className="fixed left-4 top-1/2 -translate-y-1/2 bg-[#1a1a1a] rounded-3xl py-8 px-2 z-50 flex flex-col items-center shadow-2xl border border-gray-800"
       style={{ height: "95vh" }}
       initial={false}
       animate={{
-        width: isExpanded ? 200 : 90,
+        width: isExpanded ? 200 : 80,
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
       onMouseEnter={() => setIsExpanded(true)}
