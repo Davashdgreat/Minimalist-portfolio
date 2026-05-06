@@ -190,7 +190,7 @@ const Contact: React.FC = () => {
             </div>
             <button
               type="submit"
-              className="w-full border bg-transparent text-white py-3 rounded-lg hover:bg-gray-500 hover:text-black hover:border-black cursor-pointer"
+              className="w-full border bg-transparent text-white py-3 rounded-lg hover:bg-gray-500 hover:text-white hover:border-black cursor-pointer"
             >
               Send Message
             </button>
