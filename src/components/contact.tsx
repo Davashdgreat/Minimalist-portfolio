@@ -75,8 +75,8 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-10 md:px-10">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <section className="py-8 md:py-12 lg:py-16">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
         {/* Left Side - Socials */}
         <motion.div
           ref={leftRef}
@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
           animate={{ x: inViewLeft ? 0 : -200, opacity: inViewLeft ? 1 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-          <h2 className="text-3xl font-600 text-gray-900 dark:text-gray-100">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-900 dark:text-gray-100">
             Reach out to me on my socials
           </h2>
           <div className="flex justify-center space-x-6 animate-bounce">
@@ -142,13 +142,13 @@ const Contact: React.FC = () => {
         <motion.div
           ref={rightRef}
           // className="border shadow-lg rounded-lg p-8"
-          className="bg-white/10 backdrop-blur-10 border border-white/20 shadow-2xl rounded-2xl p-8"
+          className="bg-white/10 backdrop-blur-10 border border-white/20 shadow-2xl rounded-2xl p-5 md:p-7"
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: inViewRight ? 0 : 200, opacity: inViewRight ? 1 : 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-6 dark:text-gray-100">Contact Me</h3>
-          <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+          <h3 className="text-lg md:text-2xl font-semibold text-gray-900 mb-4 dark:text-gray-100">Contact Me</h3>
+          <form ref={formRef} onSubmit={sendEmail} className="space-y-3 md:space-y-4">
             <div>
               <label htmlFor="name" className="block text-white">
                 Name
@@ -158,7 +158,7 @@ const Contact: React.FC = () => {
                 name="user_name"
                 id="name"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg text-white"
+                className="w-full p-2.5 border border-gray-300 rounded-lg text-white text-sm"
                 placeholder="John Doe"
               />
             </div>
@@ -171,7 +171,7 @@ const Contact: React.FC = () => {
                 name="user_email"
                 id="email"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg text-white"
+                className="w-full p-2.5 border border-gray-300 rounded-lg text-white text-sm"
                 placeholder="johndoe@gmail.com"
               />
             </div>
@@ -182,9 +182,9 @@ const Contact: React.FC = () => {
               <textarea
                 name="message"
                 id="message"
-                rows={4}
+                rows={3}
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg text-white"
+                className="w-full p-2.5 border border-gray-300 rounded-lg text-white text-sm"
                 placeholder="You can type in a message or request features added to this website"
               ></textarea>
             </div>

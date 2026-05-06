@@ -89,9 +89,9 @@ const projects = [
 
 const Home: React.FC = () => {
   return (
-    <section className="py-8 md:py-12 lg:py-16 text-white">
+    <section className="py-6 md:py-10 lg:py-12 text-white">
       {/* Hero */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-10 md:mb-14 lg:mb-20 gap-6 md:gap-4">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-8 md:mb-10 lg:mb-14 gap-5 md:gap-4">
         <div className="leading-none">
           <h1 className="text-6xl sm:text-7xl md:text-8xl xl:text-9xl font-medium tracking-tight text-gray-100">
             DAV
@@ -102,7 +102,7 @@ const Home: React.FC = () => {
             <TextShuffle text="AOLU" baseDelay={900} />
           </h1>
         </div>
-        <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-400 md:text-right md:max-w-[220px] lg:max-w-xs leading-relaxed">
+        <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-200 md:text-right md:max-w-[220px] lg:max-w-xs leading-relaxed">
           DEVELOPER • AUTOMATION ENGINEER • CREATOR
         </p>
       </div>
@@ -114,7 +114,7 @@ const Home: React.FC = () => {
         </h2>
         <a
           href="/projects"
-          className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors duration-300"
+          className="flex items-center gap-1 text-sm text-gray-200 hover:text-white transition-colors duration-300"
         >
           See More <ArrowUpRight className="w-4 h-4" />
         </a>
@@ -128,7 +128,7 @@ const Home: React.FC = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="w-[78vw] max-w-[280px] sm:w-64 sm:max-w-none md:w-72 lg:w-80 xl:w-96 h-52 sm:h-56 md:h-64 lg:h-72 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-500 border border-white/10 group relative cursor-pointer"
+            className="w-[75vw] max-w-[260px] sm:w-60 sm:max-w-none md:w-64 lg:w-72 xl:w-80 h-44 sm:h-48 md:h-42 lg:h-60 xl:h-64 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-500 border border-white/10 group relative cursor-pointer"
           >
             <img
               alt={project.title}
@@ -136,7 +136,7 @@ const Home: React.FC = () => {
               className="w-full h-full object-cover transition duration-700 group-hover:blur-sm group-hover:scale-110"
             />
             <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 to-transparent group-hover:from-black/85 group-hover:to-black/40 transition-all duration-500 p-4 md:p-5">
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col gap-2">
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col gap-1.5">
                 <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">
                   {project.title}
                 </h3>

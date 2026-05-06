@@ -67,11 +67,11 @@ const Projects: React.FC = () => {
 
   if (selectedProject) {
     return (
-      <section id="projects" className="py-13 px-6">
+      <section id="projects" className="py-8 md:py-10">
         <div className="max-w-7xl mx-auto">
           <motion.button
             onClick={() => setSelectedProject(null)}
-            className="mb-8 text-gray-900 dark:text-gray-100 hover:cursor-pointer flex items-center"
+            className="mb-4 text-gray-900 dark:text-gray-100 hover:cursor-pointer flex items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -91,10 +91,10 @@ const Projects: React.FC = () => {
               <img
                 src={selectedProject.image}
                 alt={selectedProject.title}
-                className="w-full h-64 object-cover rounded-lg mb-6"
+                className="w-full h-40 md:h-56 object-cover rounded-lg mb-4"
               />
             )}
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+            <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 mb-4">
               {selectedProject.description}
             </p>
             <div className="mb-6">
@@ -121,21 +121,21 @@ const Projects: React.FC = () => {
   }
 
   return (
-    <section className="py-10 md:py-10 px-4 md:px-6">
-      <div className="md:w-2xl lg:w-6xl mx-auto">
+    <section className="py-6 md:py-8 lg:py-10">
+      <div className="mx-auto">
         <motion.h2
-          className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-10 text-center"
+          className="text-xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-5 md:mb-7 text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           My Top Rated Projects
         </motion.h2>
-        <div className="grid grid-cols-1 gap-6 max-w-xs mx-auto sm:max-w-sm md:max-w-none md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-3 md:gap-4 lg:gap-5 md:grid-cols-3">
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="group relative h-64 sm:h-60 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+              className="group relative h-36 sm:h-40 md:h-44 lg:h-52 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -158,27 +158,26 @@ const Projects: React.FC = () => {
               />
 
               {/* Content – always at bottom */}
-              <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                <h3 className="text-xl font-semibold text-white mb-2 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 p-3 md:p-5 flex flex-col justify-end">
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white mb-1.5 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {project.title}
                 </h3>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Tags — hidden on small mobile to save space */}
+                <div className="hidden sm:flex flex-wrap gap-1.5 mb-2 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {project.techStack.split(", ").map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-white/20 text-white text-sm rounded-full"
+                      className="px-2 py-0.5 bg-white/20 text-white text-[10px] md:text-xs rounded-full"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                {/* View More button – only on hover (desktop), or always visible on mobile if you want */}
                 <button
                   onClick={() => setSelectedProject(project)}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white py-2 rounded-lg backdrop-blur-sm transition
+                  className="w-full bg-white/20 hover:bg-white/30 text-white py-1.5 md:py-2 text-xs md:text-sm rounded-lg backdrop-blur-sm transition
                      md:opacity-0 group-hover:opacity-100"
                 >
                   View More
