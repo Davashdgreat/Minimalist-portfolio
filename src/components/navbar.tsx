@@ -66,7 +66,7 @@ const useShuffleText = (originalText: string, isHovered: boolean) => {
       setDisplayText(
         originalText
           .split("")
-          .map((originalText, index) => {
+          .map((_, index) => {
             if (index < Math.floor(iteration / 3)) return originalText[index];
             return charSet[Math.floor(Math.random() * charSet.length)];
           })
