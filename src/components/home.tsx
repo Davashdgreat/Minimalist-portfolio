@@ -128,7 +128,7 @@ const Home: React.FC = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="w-[75vw] max-w-[260px] sm:w-60 sm:max-w-none md:w-64 lg:w-72 xl:w-80 h-44 sm:h-48 md:h-42 lg:h-60 xl:h-64 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-500 border border-white/10 group relative cursor-pointer"
+            className="w-[75vw] max-w-[260px] sm:w-60 sm:max-w-none md:w-64 lg:w-72 xl:w-80 h-44 sm:h-48 md:h-42 lg:h-60 xl:h-45 flex-shrink-0 snap-start rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:scale-[1.03] transition-all duration-500 border border-white/10 group relative cursor-pointer"
           >
             <img
               alt={project.title}
